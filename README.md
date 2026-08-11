@@ -27,7 +27,27 @@ The main objectives of this project are:
 - Provide an interactive dashboard for business insights
 
 ---
+The dashboard will open in your web browser.
 
+---
+
+## 👩‍💻 Developed By
+
+**Taniya Bhalla**
+
+**B.Tech — Information Technology**
+
+**Guru Jambheshwar University of Science & Technology, Hisar**
+
+---
+
+## 🎯 Project Objective
+
+To optimize factory allocation by identifying suitable factories based on lead time, expected profit, shipping performance, risk level, and recommendation status.
+
+---
+
+### Data Analytics • Machine Learning • Recommendation System
 ## 📊 Dataset
 
 The project uses an order-level dataset containing information related to:
