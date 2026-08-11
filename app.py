@@ -2,18 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
-
 st.set_page_config(
     page_title="Factory Reallocation & Shipping Optimization",
     page_icon="🏭",
     layout="wide"
 )
-# =========================
-# PROFESSIONAL DASHBOARD STYLE
-# =========================
 
 st.markdown("""
 <style>
@@ -63,15 +56,8 @@ div[data-testid="stMetricValue"] {
 </style>
 """, unsafe_allow_html=True)
 
-# =========================================================
-# LOAD DATA
-# =========================================================
-
 df = pd.read_excel("Final_Dataset.xlsx")
 
-# =========================================================
-# TITLE
-# =========================================================
 st.markdown(
     '<div class="main-title">🏭 Factory Reallocation & Shipping Optimization</div>',
     unsafe_allow_html=True
@@ -83,10 +69,6 @@ st.markdown(
 )
 
 st.markdown("---")
-
-# =========================================================
-# SIDEBAR FILTERS
-# =========================================================
 
 st.sidebar.title("🔍 Dashboard Filters")
 st.sidebar.caption("Use the filters to explore the data")
@@ -101,7 +83,6 @@ selected_factory = st.sidebar.selectbox(
     factory_options
 )
 
-# Region
 region_options = ["All"] + sorted(
     df["Region"].dropna().astype(str).unique().tolist()
 )
@@ -111,7 +92,6 @@ selected_region = st.sidebar.selectbox(
     region_options
 )
 
-# Division
 division_options = ["All"] + sorted(
     df["Division"].dropna().astype(str).unique().tolist()
 )
@@ -121,7 +101,6 @@ selected_division = st.sidebar.selectbox(
     division_options
 )
 
-# Recommendation
 recommendation_options = ["All"] + sorted(
     df["Recommendation Status"]
     .dropna()
@@ -135,7 +114,6 @@ selected_recommendation = st.sidebar.selectbox(
     recommendation_options
 )
 
-# Risk Level
 risk_options = ["All"] + sorted(
     df["Risk Level"].dropna().astype(str).unique().tolist()
 )
@@ -145,7 +123,6 @@ selected_risk = st.sidebar.selectbox(
     risk_options
 )
 
-# Lead Time Category
 lead_category_options = ["All"] + sorted(
     df["Lead Time Category"]
     .dropna()
@@ -159,7 +136,6 @@ selected_lead_category = st.sidebar.selectbox(
     lead_category_options
 )
 
-# Shipping Speed
 shipping_options = ["All"] + sorted(
     df["Shipping Speed"]
     .dropna()
@@ -172,10 +148,6 @@ selected_shipping = st.sidebar.selectbox(
     "🚚 Shipping Speed",
     shipping_options
 )
-
-# =========================================================
-# APPLY FILTERS
-# =========================================================
 
 filtered_df = df.copy()
 
@@ -217,11 +189,6 @@ if selected_shipping != "All":
         == selected_shipping
     ]
 
-
-    # =========================================================
-# KPI CARDS
-# =========================================================
-
 st.subheader("📊 Key Performance Indicators")
 
 total_orders = len(filtered_df)
@@ -260,12 +227,8 @@ with col5:
 with col6:
     st.metric("💹 Profit Margin", f"{profit_margin:.1f}%")
 
-# TOP PERFORMANCE HIGHLIGHTS
-# =========================================================
-
 highlight1, highlight2, highlight3 = st.columns(3)
 
-# Top factory by sales
 top_sales_factory = (
     filtered_df.groupby("Factory")["Sales"]
     .sum()
@@ -278,7 +241,6 @@ top_sales_value = (
     .max()
 )
 
-# Most recommended factory
 top_recommended_factory = (
     filtered_df["Suggested Factory"]
     .value_counts()
@@ -291,7 +253,6 @@ top_recommended_orders = (
     .max()
 )
 
-# Highest expected profit factory
 top_profit_factory = (
     filtered_df.groupby("Suggested Factory")["Expected Profit"]
     .sum()
@@ -324,9 +285,6 @@ with highlight3:
         f"### {top_profit_factory}\n"
         f"Expected Profit: **${top_profit_value:,.0f}**"
     )
-# =========================================================
-# KEY INSIGHTS
-# =========================================================
 
 st.markdown("---")
 
@@ -335,7 +293,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Calculate insights
 top_factory = (
     filtered_df.groupby("Factory")["Sales"]
     .sum()
@@ -407,9 +364,6 @@ with insight3:
         """,
         unsafe_allow_html=True
     )
-# =========================================================
-# ROW 1 — SALES & PROFIT BY FACTORY
-# =========================================================
 
 col1, col2 = st.columns(2)
 
@@ -467,10 +421,6 @@ with col2:
         use_container_width=True
     )
 
-# =========================================================
-# ROW 2 — REGION & DIVISION
-# =========================================================
-
 col1, col2 = st.columns(2)
 
 with col1:
@@ -516,10 +466,6 @@ with col2:
         fig_division,
         use_container_width=True
     )
-
-# =========================================================
-# ROW 3 — ORDER & UNIT ANALYSIS
-# =========================================================
 
 col1, col2 = st.columns(2)
 
@@ -570,9 +516,6 @@ with col2:
         fig_units,
         use_container_width=True
     )
-# =========================================================
-# RECOMMENDATION ANALYSIS
-# =========================================================
 
 st.markdown("---")
 
@@ -582,7 +525,6 @@ st.caption(
     "Analysis of recommended factory allocation and associated risk levels."
 )
 
-# Recommendation Status
 recommendation_counts = (
     filtered_df["Recommendation Status"]
     .value_counts()
@@ -594,7 +536,6 @@ recommendation_counts.columns = [
     "Count"
 ]
 
-# Risk Level
 risk_counts = (
     filtered_df["Risk Level"]
     .value_counts()
@@ -607,10 +548,6 @@ risk_counts.columns = [
 ]
 
 col1, col2 = st.columns(2)
-
-# =========================================================
-# RECOMMENDATION STATUS
-# =========================================================
 
 with col1:
 
@@ -642,10 +579,6 @@ with col1:
         use_container_width=True
     )
 
-# =========================================================
-# RISK LEVEL
-# =========================================================
-
 with col2:
 
     fig_risk = px.pie(
@@ -675,9 +608,6 @@ with col2:
         fig_risk,
         use_container_width=True
     )
-# =========================================================
-# ROW 5 — LEAD TIME & SHIPPING
-# =========================================================
 
 col1, col2 = st.columns(2)
 
@@ -733,10 +663,6 @@ with col2:
         use_container_width=True
     )
 
-# =========================================================
-# ROW 6 — MONTHLY SALES TREND
-# =========================================================
-
 st.subheader("📅 Sales Trend")
 
 monthly_sales = (
@@ -762,9 +688,6 @@ st.plotly_chart(
     fig_monthly,
     use_container_width=True
 )
-# =========================================================
-# FACTORY RECOMMENDATION & EXPECTED PROFIT
-# =========================================================
 
 st.markdown("---")
 
@@ -775,10 +698,6 @@ st.caption(
 )
 
 col1, col2 = st.columns(2)
-
-# =========================================================
-# SUGGESTED FACTORY
-# =========================================================
 
 with col1:
 
@@ -811,9 +730,6 @@ with col1:
         fig_suggested,
         use_container_width=True
     )
-# =========================================================
-# CURRENT FACTORY VS SUGGESTED FACTORY
-# =========================================================
 
 st.markdown("---")
 
@@ -853,9 +769,6 @@ st.plotly_chart(
     fig_movement,
     use_container_width=True
 )
-# =========================================================
-# EXPECTED PROFIT
-# =========================================================
 
 with col2:
 
@@ -890,10 +803,7 @@ with col2:
         fig_expected,
         use_container_width=True
     )
-    # =========================================================
-# PREDICTED LEAD TIME ANALYSIS
-# =========================================================
-
+    
 st.markdown("---")
 
 st.header("⏱️ Predicted Lead Time Analysis")
@@ -927,9 +837,6 @@ st.plotly_chart(
     fig_predicted_lead,
     use_container_width=True
 )
-# =========================================================
-# FILTERED DATASET
-# =========================================================
 
 st.markdown("---")
 
@@ -944,9 +851,6 @@ with st.expander("📋 View Filtered Dataset"):
         use_container_width=True,
         height=450
     )
-# =========================================================
-# PROJECT INFORMATION & FOOTER
-# =========================================================
 
 st.markdown("---")
 
@@ -964,7 +868,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Project information
 info1, info2, info3 = st.columns(3)
 
 with info1:
@@ -1023,7 +926,6 @@ st.markdown(
 
 st.markdown("")
 
-# Technologies
 st.markdown(
     "<p style='text-align:center; color:#163A6B; font-size:17px;'>"
     "<b>🛠️ Technologies Used</b>"
