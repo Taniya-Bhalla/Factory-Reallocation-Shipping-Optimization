@@ -164,3 +164,15 @@ The analysis produced the following key outcomes:
 
 ```bash
 pip install streamlit pandas plotly scikit-learn openpyxl
+### 2. Keep the project files in the same folder
+
+Factory-Reallocation-Shipping-Optimization/
+│
+├── app.py
+├── Final_Dataset.xlsx
+└── README.md
+
+### 3. Run the Streamlit application
+
+```bash
+python -m streamlit run app.py
