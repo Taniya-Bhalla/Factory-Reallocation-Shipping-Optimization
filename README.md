@@ -196,3 +196,24 @@ Factory-Reallocation-Shipping-Optimization/
 
 ```bash
 python -m streamlit run app.py
+The dashboard will open in your web browser.
+
+---
+
+## 👩‍💻 Developed By
+
+**Taniya Bhalla**
+
+**B.Tech — Information Technology**
+
+**Guru Jambheshwar University of Science & Technology, Hisar**
+
+---
+
+## 🎯 Project Objective
+
+To optimize factory allocation by identifying suitable factories based on lead time, expected profit, shipping performance, risk level, and recommendation status.
+
+---
+
+### Data Analytics • Machine Learning • Recommendation System
