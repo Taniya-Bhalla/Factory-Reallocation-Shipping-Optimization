@@ -57,7 +57,7 @@ div[data-testid="stMetricValue"] {
 </style>
 """, unsafe_allow_html=True)
 
-file_path = os.path.join(os.path.dirname(__file__), "Final_Dataset.xlsx")
+file_path = os.path.join(os.path.dirname(__file__), "final_dataset.xlsx")
 df = pd.read_excel(file_path)
 
 st.markdown(
