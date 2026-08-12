@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
 st.set_page_config(
     page_title="Factory Reallocation & Shipping Optimization",
@@ -55,8 +56,6 @@ div[data-testid="stMetricValue"] {
 
 </style>
 """, unsafe_allow_html=True)
-
-import os
 
 file_path = os.path.join(os.path.dirname(__file__), "Final_Dataset.xlsx")
 df = pd.read_excel(file_path)
