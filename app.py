@@ -56,7 +56,10 @@ div[data-testid="stMetricValue"] {
 </style>
 """, unsafe_allow_html=True)
 
-df = pd.read_excel("Final_Dataset.xlsx")
+import os
+
+file_path = os.path.join(os.path.dirname(__file__), "Final_Dataset.xlsx")
+df = pd.read_excel(file_path)
 
 st.markdown(
     '<div class="main-title">🏭 Factory Reallocation & Shipping Optimization</div>',
