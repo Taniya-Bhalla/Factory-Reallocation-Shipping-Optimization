@@ -177,6 +177,8 @@ The analysis produced the following key outcomes:
 - Interactive dashboard developed for analyzing operational and financial performance
 
 ---
+View Live Project-https://factory-reallocation-dashboard.streamlit.app/
+
 
 ## ▶️ How to Run the Dashboard
 
@@ -218,4 +220,3 @@ To optimize factory allocation by identifying suitable factories based on lead t
 
 ### Data Analytics • Machine Learning • Recommendation System
 
-View Live Project-https://factory-reallocation-dashboard.streamlit.app/
